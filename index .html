@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="calculator">
+        <input type="text" id="space">
+        <div id="operation" style="display: flex; flex-direction: column;">
+            <div style="display: flex" id="main">
+                <button id="number">1</button>
+                <button id="two">2</button>
+                <button id="three">3</button>
+                <button id="plus">&plus;</button>
+            </div>
+            <div style="display: flex" id="select">
+                <button id="four">4</button>
+                <button id="five">5</button>
+                <button id="six">6</button>
+                <button id="minus">&minus;</button>
+            </div>
+            <div style="display: flex" id="nom">
+                <button id="seven">7</button>
+                <button id="eigth">8</button>
+                <button id="nine">9</button>
+                <button id="times">&times;</button>
+            </div>
+            <div style="display: flex" id="arl">
+                <button id="zero">0</button>
+                <button id="dot">.</button>
+                <button id="division">&divide;</button>
+            </div>
+            <div id="calculator-keys" style="display: flex;">
+                <button id="one-delete">DEL</button>
+                <button id="percent">&percnt;</button>
+                <button id="erase">AC</button>
+                <button onclick="calculateResult()" id="operator">&equals;</button>
+            </div>
+        </div>
+    </div>
+    <script src="script/calculator.js"></script>
+</body>
+</html>
