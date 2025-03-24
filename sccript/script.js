@@ -3,14 +3,14 @@
  */
 
 function load() {
-    var btns = document.querySelectorAll("#calculator span");
-    var operators = ["+", "-", "x", "÷"];
-    var inputScreen = document.querySelector("#screen");
-    var btnValue;
-    var input;
+    let btns = document.querySelectorAll("#calculator span");
+    let operators = ["+", "-", "x", "÷"];
+    let inputScreen = document.querySelector("#screen");
+    let btnValue;
+    let input;
   
-    for (var i = 0; i < btns.length; i++) {
-      var decimalAdded = false; // Flag used to avoid two decimal
+    for (let i = 0; i < btns.length; i++) {
+      let decimalAdded = false; // Flag used to avoid two decimal
   
       btns[i].addEventListener("click", function() {
         btnValue = this.innerHTML;
@@ -23,7 +23,7 @@ function load() {
             break;
           case "=":
             // Last char of string
-            var lastChar = input[input.length - 1];
+            let lastChar = input[input.length - 1];
   
             // Replace x to *, + to / which could be calculated in eval
             input = input.replace(/x/g, "*").replace(/÷/g, "/");
@@ -52,7 +52,7 @@ function load() {
           case "x":
           case "÷":
             // Last char of string
-            var lastChar = input[input.length - 1];
+            let lastChar = input[input.length - 1];
   
             // Only add operator if input is not empty and there is no operator at the last
             if (input != "" && operators.indexOf(lastChar) == -1)
