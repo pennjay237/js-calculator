@@ -1,46 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>Document</title>
+    <meta charset="UTF-8"/>
+    <title>Calculator</title>
+    <link rel="stylesheet" type="text/css" href="styles/style .css">
 </head>
-<body>
+<body onload="load()">
     <div id="calculator">
-        <input type="text" id="space">
-        <div id="operation" style="display: flex; flex-direction: column;">
-            <div style="display: flex" id="main">
-                <button id="number">1</button>
-                <button id="two">2</button>
-                <button id="three">3</button>
-                <button id="plus">&plus;</button>
-            </div>
-            <div style="display: flex" id="select">
-                <button id="four">4</button>
-                <button id="five">5</button>
-                <button id="six">6</button>
-                <button id="minus">&minus;</button>
-            </div>
-            <div style="display: flex" id="nom">
-                <button id="seven">7</button>
-                <button id="eigth">8</button>
-                <button id="nine">9</button>
-                <button id="times">&times;</button>
-            </div>
-            <div style="display: flex" id="arl">
-                <button id="zero">0</button>
-                <button id="dot">.</button>
-                <button id="division">&divide;</button>
-            </div>
-            <div id="calculator-keys" style="display: flex;">
-                <button id="one-delete">DEL</button>
-                <button id="percent">&percnt;</button>
-                <button id="erase">AC</button>
-                <button onclick="calculateResult()" id="operator">&equals;</button>
-            </div>
+        <!-- Screen and clear key -->
+        <div class="top">
+            <span id="clear">C</span>
+            <div id="screen"></div>
+        </div>
+
+        <div class="keys">
+            <!-- operators and other keys -->
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span class="operator">+</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+            <span class="operator">-</span>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span class="operator">÷</span>
+            <span>0</span>
+            <span>.</span>
+            <span class="eval">=</span>
+            <span class="operator">x</span>
         </div>
     </div>
-    <script src="script/calculator.js"></script>
+    <script type="text/javascript" src="/sccript/script.js"></script>
 </body>
 </html>

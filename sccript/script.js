@@ -1,102 +1,77 @@
-// Récupérer l'élément d'affichage (input)
-const display = document.getElementById('space')
+/**
+ * Created by chuandong on 15/11/27.
+ */
 
-let currentInput = ''
-let previousInput = ''
-let operator = null
-
-// Fonction pour mettre à jour l'affichage
-function updateDisplay () {
-  display.value = currentInput || '0'
-}
-
-// Fonction pour ajouter un chiffre ou un point
-function appendNumber (number) {
-  if (number === '.' && currentInput.includes('.')) return
-  currentInput += number
-  updateDisplay()
-}
-
-function chooseOperation (op) {
-  if (currentInput === '') return
-  if (previousInput !== '') {
-    calculateResult()
-  }
-  operator = op
-  previousInput = currentInput
-  currentInput = ''
-}
-
-function calculateResult () {
-  if (operator === null || currentInput === '') return
-
-  let result
-  const prev = parseFloat(previousInput)
-  const current = parseFloat(currentInput)
-
-  switch (operator) {
-    case '+':
-      result = prev + current
-      break
-    case '-':
-      result = prev - current
-      break
-    case '×':
-      result = prev * current
-      break
-    case '÷':
-      result = prev / current
-      break
-    default:
-      return
-  }
-
-  currentInput = result.toString()
-  operator = null
-  previousInput = ''
-  updateDisplay()
-}
-
-function clearAll () {
-  currentInput = ''
-  previousInput = ''
-  operator = null
-  updateDisplay()
-}
-
-function deleteLast () {
-  currentInput = currentInput.slice(0, -1)
-  updateDisplay()
-}
-
-function calculatePercentage () {
-  if (currentInput === '') return
-  currentInput = (parseFloat(currentInput) / 100)
-  updateDisplay()
-}
-
-document.querySelectorAll('#main button, #select button, #nom button, #arl button').forEach(button => {
-  button.addEventListener('click', () => {
-    if (button.id === 'plus') {
-      chooseOperation('+')
-    } else if (button.id === 'minus') {
-      chooseOperation('-')
-    } else if (button.id === 'times') {
-      chooseOperation('×')
-    } else if (button.id === 'division') {
-      chooseOperation('÷')
-    } else if (button.id === 'erase') {
-      clearAll()
-    } else if (button.id === 'one-delete') {
-      deleteLast()
-    } else if (button.id === 'percent') {
-      calculatePercentage()
-    } else {
-      appendNumber(button.textContent)
+function load() {
+    var btns = document.querySelectorAll("#calculator span");
+    var operators = ["+", "-", "x", "÷"];
+    var inputScreen = document.querySelector("#screen");
+    var btnValue;
+    var input;
+  
+    for (var i = 0; i < btns.length; i++) {
+      var decimalAdded = false; // Flag used to avoid two decimal
+  
+      btns[i].addEventListener("click", function() {
+        btnValue = this.innerHTML;
+        input = inputScreen.innerHTML;
+  
+        switch (btnValue) {
+          case "C":
+            inputScreen.innerHTML = "";
+            decimalAdded = false;
+            break;
+          case "=":
+            // Last char of string
+            var lastChar = input[input.length - 1];
+  
+            // Replace x to *, + to / which could be calculated in eval
+            input = input.replace(/x/g, "*").replace(/÷/g, "/");
+  
+            // Checking the last character of the input.
+            // If it's an operator or a decimal, remove it
+            // /.$/ means last char in regex
+            if (operators.indexOf(lastChar) > -1 || lastChar == ".")
+              input = input.replace(/.$/, "");
+  
+            if (input) {
+              // If the argument is an expression, eval() evaluates the expression.
+              // If the argument is one or more JavaScript statements, eval() executes the statements.
+              inputScreen.innerHTML = eval(input);
+            }
+            decimalAdded = false;
+            break;
+          case ".":
+            if (!decimalAdded) {
+              inputScreen.innerHTML += btnValue;
+              decimalAdded = true;
+            }
+            break;
+          case "+":
+          case "-":
+          case "x":
+          case "÷":
+            // Last char of string
+            var lastChar = input[input.length - 1];
+  
+            // Only add operator if input is not empty and there is no operator at the last
+            if (input != "" && operators.indexOf(lastChar) == -1)
+              inputScreen.innerHTML += btnValue;
+            // Allows minus if the string is empty. The first number could be under zero
+            else if (input == "" && btnValue == "-")
+              inputScreen.innerHTML += btnValue;
+  
+            // Allows to represent the last operation
+            if (operators.indexOf(lastChar) > -1 && input.length > 1) {
+              inputScreen.innerHTML = input.replace(/.$/, btnValue);
+            }
+            decimalAdded = false;
+            break;
+          default:
+            inputScreen.innerHTML += btnValue;
+            decimalAdded = false;
+            break;
+        }
+      });
     }
-  })
-})
-
-document.getElementById('operator').addEventListener('click', calculateResult)
-document.getElementById('erase').addEventListener('click', clearAll)
-document.getElementById('one-delete').addEventListener('click', deleteLast)
+  }
